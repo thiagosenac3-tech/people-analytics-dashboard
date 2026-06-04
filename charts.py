@@ -15,7 +15,7 @@ COR_TEXTO      = "#8899aa"
 FUNDO_GRAFICO  = "#1e2225"
 
 
-def _storm(fig: plt.Figure, ax: plt.Axes, title: str) -> None:
+def _storm(fig: plt.Figure, ax: plt.Axes) -> None:
     """Aplica o tema Storm em gráficos de barras e histogramas."""
     fig.patch.set_facecolor(FUNDO_GRAFICO)
     ax.set_facecolor(FUNDO_GRAFICO)
@@ -24,16 +24,14 @@ def _storm(fig: plt.Figure, ax: plt.Axes, title: str) -> None:
     ax.spines["left"].set_color((1.0, 1.0, 1.0, 0.08))
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
-    ax.set_title(title, color="#ffffff", fontsize=12, fontweight="bold", pad=10)
     ax.xaxis.label.set_color(COR_TEXTO)
     ax.yaxis.label.set_color(COR_TEXTO)
 
 
-def _storm_donut(fig: plt.Figure, ax: plt.Axes, title: str) -> None:
+def _storm_donut(fig: plt.Figure, ax: plt.Axes) -> None:
     """Aplica o tema Storm em gráficos de rosca."""
     fig.patch.set_facecolor(FUNDO_GRAFICO)
     ax.set_facecolor(FUNDO_GRAFICO)
-    ax.set_title(title, color="#ffffff", fontsize=12, fontweight="bold", pad=10)
 
 
 def _bar_labels(ax: plt.Axes, bars, fmt: str = "%.0f") -> None:
@@ -53,7 +51,7 @@ def chart_headcount_by_department(df: pd.DataFrame) -> plt.Figure:
     _bar_labels(ax, bars)
     ax.set_xlim(0, df["Count"].max() * 1.2)
     ax.set_xlabel("Funcionários")
-    _storm(fig, ax, "Headcount por Departamento")
+    _storm(fig, ax)
     fig.tight_layout()
     plt.close(fig)
     return fig
@@ -67,7 +65,7 @@ def chart_headcount_by_jobrole(df: pd.DataFrame) -> plt.Figure:
     _bar_labels(ax, bars)
     ax.set_xlim(0, df["Count"].max() * 1.2)
     ax.set_xlabel("Funcionários")
-    _storm(fig, ax, "Headcount por Cargo (Top 8)")
+    _storm(fig, ax)
     fig.tight_layout()
     plt.close(fig)
     return fig
@@ -83,7 +81,7 @@ def chart_gender_donut(df: pd.DataFrame) -> plt.Figure:
         wedgeprops=wedgeprops, autopct="%1.1f%%",
         textprops={"color": "#e8eaf0", "fontsize": 9},
     )
-    _storm_donut(fig, ax, "Distribuição por Gênero")
+    _storm_donut(fig, ax)
     fig.tight_layout()
     plt.close(fig)
     return fig
@@ -99,7 +97,7 @@ def chart_headcount_by_joblevel(df: pd.DataFrame) -> plt.Figure:
     ax.set_xlabel("Nível do Cargo")
     ax.set_ylabel("Funcionários")
     ax.yaxis.set_major_locator(mticker.MaxNLocator(integer=True))
-    _storm(fig, ax, "Headcount por Nível de Cargo")
+    _storm(fig, ax)
     fig.tight_layout()
     plt.close(fig)
     return fig
@@ -113,7 +111,7 @@ def chart_headcount_by_education(df: pd.DataFrame) -> plt.Figure:
     _bar_labels(ax, bars)
     ax.set_xlim(0, df["Count"].max() * 1.2)
     ax.set_xlabel("Funcionários")
-    _storm(fig, ax, "Headcount por Área de Formação")
+    _storm(fig, ax)
     fig.tight_layout()
     plt.close(fig)
     return fig
@@ -126,7 +124,7 @@ def chart_age_histogram(age_series: pd.Series) -> plt.Figure:
     ax.set_xlabel("Idade")
     ax.set_ylabel("Funcionários")
     ax.yaxis.set_major_locator(mticker.MaxNLocator(integer=True))
-    _storm(fig, ax, "Distribuição de Idade")
+    _storm(fig, ax)
     fig.tight_layout()
     plt.close(fig)
     return fig
@@ -143,7 +141,7 @@ def chart_attrition_by_department(df: pd.DataFrame) -> plt.Figure:
     _bar_labels(ax, bars, fmt="%.1f%%")
     ax.set_xlim(0, df["AttritionRate"].max() * 1.3)
     ax.set_xlabel("Taxa de Turnover (%)")
-    _storm(fig, ax, "Turnover por Departamento")
+    _storm(fig, ax)
     fig.tight_layout()
     plt.close(fig)
     return fig
@@ -158,7 +156,7 @@ def chart_attrition_by_jobrole(df: pd.DataFrame) -> plt.Figure:
     _bar_labels(ax, bars, fmt="%.1f%%")
     ax.set_xlim(0, df["AttritionRate"].max() * 1.3)
     ax.set_xlabel("Taxa de Turnover (%)")
-    _storm(fig, ax, "Turnover por Cargo (Top 8)")
+    _storm(fig, ax)
     fig.tight_layout()
     plt.close(fig)
     return fig
@@ -174,7 +172,7 @@ def chart_attrition_by_gender(df: pd.DataFrame) -> plt.Figure:
         wedgeprops=wedgeprops, autopct="%1.1f%%",
         textprops={"color": "#e8eaf0", "fontsize": 9},
     )
-    _storm_donut(fig, ax, "Turnover por Gênero")
+    _storm_donut(fig, ax)
     fig.tight_layout()
     plt.close(fig)
     return fig
@@ -190,7 +188,7 @@ def chart_attrition_by_joblevel(df: pd.DataFrame) -> plt.Figure:
     ax.set_ylim(0, df["AttritionRate"].max() * 1.3)
     ax.set_xlabel("Nível do Cargo")
     ax.set_ylabel("Taxa de Turnover (%)")
-    _storm(fig, ax, "Turnover por Nível de Cargo")
+    _storm(fig, ax)
     fig.tight_layout()
     plt.close(fig)
     return fig
@@ -207,7 +205,7 @@ def chart_satisfaction_vs_attrition(df: pd.DataFrame) -> plt.Figure:
     _bar_labels(ax, bars, fmt="%.2f")
     ax.set_ylim(0, 4.8)
     ax.set_ylabel("Satisfação Média (1–4)")
-    _storm(fig, ax, "Satisfação Média: Ficou vs Saiu")
+    _storm(fig, ax)
     fig.tight_layout()
     plt.close(fig)
     return fig
@@ -224,7 +222,7 @@ def chart_attrition_by_overtime(df: pd.DataFrame) -> plt.Figure:
     _bar_labels(ax, bars, fmt="%.1f%%")
     ax.set_ylim(0, df["AttritionRate"].max() * 1.35)
     ax.set_ylabel("Taxa de Turnover (%)")
-    _storm(fig, ax, "Hora Extra vs Turnover")
+    _storm(fig, ax)
     fig.tight_layout()
     plt.close(fig)
     return fig
